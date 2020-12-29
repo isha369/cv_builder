@@ -1,0 +1,185 @@
+<%- include('./partials/header') %>
+<div id="main_resume" style="background-color: white; display:flex; flex-direction:column;">
+    <div style="background-color: #e1e4e4; height:100%; margin:30px 30px 30px; padding: 10px 10px;">
+        <!-- class="jumbotron container"  -->
+        <div class="d-flex justify-content-between">
+            <div>
+
+            </div>
+        </div>
+
+
+        <div>
+            <% result.UserProfile.forEach(function(object){ %>
+            <div style="background-color:#0b3141; color:white;margin:0px 0px 0px;">
+                <h5 style="font-size: 80px; padding: 0px 0px 0px 15px; "><%= object.Name %></h5>
+                <h5 style="padding: 0px 0px 0px 15px;"><%= object.Email %></h5>
+                <h5 style="padding: 0px 0px 0px 15px;"><%= object.No %></h5>
+                <h5 style="padding: 0px 0px 0px 15px;"><%= object.Address %></h5>
+                <h5 style="padding: 0px 0px 0px 15px;"><%= object.ResumeSummary %></h5>
+            </div>
+            <% }); %>
+        </div>
+
+
+        <% if(result.Work.length!=0){ %>
+        <hr class="my-3" />
+        <h4 style="color:#003f75;">Work Experience</h4>
+        <div class="d-flex justify-content-between">
+            <% result.Work.forEach(function(object){ %>
+            <div>
+                <h5><%= object.Designation %></h5>
+                <h5><%= object.Company %></h5>
+                <h5><%= object.WorkId %></h5>
+                <h5><%= object.Duration %></h5>
+                <h5><%= object.Experience %></h5>
+            </div>
+            <% }); %>
+        </div>
+        <% } %>
+
+        <% if(result.College.length!=0){ %>
+        <hr class="my-3" />
+        <h4 style="color:#003f75;">Education</h4>
+        <div class="d-flex justify-content-between">
+            <% result.College.forEach(function(object){ %>
+            <div>
+                <h5><%= object.Title %></h5>
+                <h5><%= object.CollegeName %></h5>
+                <h5><%= object.CollegeId %></h5>
+                <h5><%= object.GraduationYear %></h5>
+                <h5><%= object.Percentage %></h5>
+            </div>
+
+            <% }); %>
+        </div>
+
+        <% } %>
+
+
+        <% if(result.Project.length!=0){ %>
+        <hr class="my-3" />
+        <h4 style="color:#003f75;">Projects</h4>
+
+        <% result.Project.forEach(function(object){ %>
+        <div>
+            <h4><%= object.ProjectName %></h4>
+            <h5><%= object.ProjectDescription %></h5>
+        </div>
+
+        <% }); %>
+
+        <% } %>
+        <% if(result.TechnicalSkill.length!=0 || result.Software.length!=0 || result.SoftSkill.length!=0){ %>
+        <hr class="my-3" />
+        <% } %>
+        <div class="d-flex justify-content-between">
+            <div>
+                <% if(result.TechnicalSkill.length!=0){ %>
+
+                <h4 style="color:#003f75;">Technical Skills</h4>
+                <% result.TechnicalSkill.forEach(function(object){ %>
+
+                <h5><%= object.TechnicalSkill %></h5>
+
+                <% }); %>
+                <% } %>
+
+            </div>
+            <div>
+
+                <% if(result.Software.length!=0){ %>
+
+                <h4 style="color:#003f75;">Softwares</h4>
+                <% result.Software.forEach(function(object){ %>
+
+                <h5><%= object.Software %></h5>
+
+                <% }); %>
+                <% } %>
+
+            </div>
+
+            <div>
+
+                <% if(result.SoftSkill.length!=0){ %>
+
+                <h4 style="color:#003f75;">Soft Skills</h4>
+                <% result.SoftSkill.forEach(function(object){ %>
+
+                <h5><%= object.SoftSkill %></h5>
+                <% }); %>
+                <% } %>
+
+            </div>
+
+        </div>
+        <% if(result.Certification.length!=0 || result.Language.length!=0 ){ %>
+        <hr class="my-3" />
+        <% } %>
+        <div class="d-flex justify-content-between">
+            <div>
+                <% if(result.Certification.length!=0){ %>
+
+                <h4 style="color:#003f75;">Certifications</h4>
+                <% result.Certification.forEach(function(object){ %>
+
+                <h5><%= object.Certification %></h5>
+
+                <% }); %>
+                <% } %>
+
+            </div>
+            <div>
+
+                <% if(result.Language.length!=0){ %>
+
+                <h4 style="color:#003f75;">Languages</h4>
+                <% result.Language.forEach(function(object){ %>
+
+                <h5><%= object.Language %></h5>
+
+
+
+
+                <% }); %>
+
+                <% } %>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="down" style="height:60px;">
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+<script>
+    let doc = new jsPDF('p', 'pt', 'a4');
+    d = document.getElementById("main_resume");
+    doc.addHTML(d, function () {
+        var clickMeButton = document.createElement('Button');
+        clickMeButton.id = 'myButton'; 
+        clickMeButton.innerHTML = 'Download Resume From Here';
+        clickMeButton.style.background = '#034b4b';
+        clickMeButton.style.margin = '0% 0% 50% 40%'; 
+        clickMeButton.style.width = '250px'; 
+        clickMeButton.style.height = '50px'; 
+        clickMeButton.style.color = 'white'; 
+        clickMeButton.onclick = clickMe;
+        var dow = document.getElementById("down")
+        dow.appendChild(clickMeButton);
+        var clickMe = document.getElementById('myButton');
+        function clickMe(){
+            let doc = new jsPDF('p', 'pt', 'a4');
+            d = document.getElementById("main_resume");
+            doc.addHTML(d, function () {
+                doc.save('resume.pdf');
+        });
+    }
+});
+</script>
+<%- include('./partials/footer') %>

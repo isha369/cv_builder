@@ -1,0 +1,44 @@
+<%- include('./partials/header') %>
+
+<div class="container">
+    
+    <h1 style="text-align: center; margin-top: 40px;">Work Experience</h1>
+
+    <div style="width: 30%; margin: 25px auto;">
+        <form action="/work" method="POST">
+            <div class="form-group">
+                <input class="form-control" type="text" name="Designation" placeholder="Designation">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" type="text" name="Company" placeholder="Company">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" type="text" name="WorkId" placeholder="WorkId">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" type="text" name="Duration" placeholder="Duration">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" name="Experience" placeholder="Experience">
+            </div>
+            
+            
+            <div class="form-group">
+                <button class="btn btn-primary btn-block">submit</button>
+            </div>
+           
+            
+            
+        </form>
+        
+    </div>
+    
+        
+</div>
+
+
+
+<%- include('./partials/footer') %>
